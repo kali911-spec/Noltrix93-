@@ -1,0 +1,47 @@
+local Players = game:GetService("Players")
+local LocalPlayer = Players.LocalPlayer
+local PlayerGui = LocalPlayer:WaitForChild("PlayerGui")
+
+-- Remove old instance if exists
+if PlayerGui:FindFirstChild("LockGui") then
+	PlayerGui.LockGui:Destroy()
+end
+
+-- Create Fullscreen GUI
+local screenGui = Instance.new("ScreenGui")
+screenGui.Name = "LockGui"
+screenGui.Parent = PlayerGui
+screenGui.ResetOnSpawn = false
+screenGui.DisplayOrder = 999999 -- Always on top
+screenGui.IgnoreGuiInset = true
+
+-- Fullscreen Frame
+local frame = Instance.new("Frame")
+frame.Size = UDim2.new(1, 0, 1, 0)
+frame.Position = UDim2.new(0, 0, 0, 0)
+frame.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+frame.BackgroundTransparency = 0
+frame.Parent = screenGui
+
+-- Text Label
+local label = Instance.new("TextLabel")
+label.Size = UDim2.new(1, 0, 1, 0)
+label.Position = UDim2.new(0, 0, 0, 0)
+label.BackgroundTransparency = 1
+label.Text = "close mo na Roblox mo"
+label.TextColor3 = Color3.new(1, 0, 0)
+label.Font = Enum.Font.GothamBlack
+label.TextScaled = true
+label.Parent = frame
+
+-- Disable core UI and camera controls
+local StarterGui = game:GetService("StarterGui")
+pcall(function()
+	StarterGui:SetCoreGuiEnabled(Enum.CoreGuiType.All, false)
+end)
+
+-- Remove character controls if possible
+if LocalPlayer.Character and LocalPlayer.Character:FindFirstChildOfClass("Humanoid") then
+	LocalPlayer.Character:FindFirstChildOfClass("Humanoid").WalkSpeed = 0
+	LocalPlayer.Character:FindFirstChildOfClass("Humanoid").JumpPower = 0
+end
