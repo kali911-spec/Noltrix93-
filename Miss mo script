@@ -1,0 +1,72 @@
+local Players = game:GetService("Players")
+local LocalPlayer = Players.LocalPlayer
+local PlayerGui = LocalPlayer:WaitForChild("PlayerGui")
+
+-- Remove old GUI if exists
+if PlayerGui:FindFirstChild("MissMoGui") then
+    PlayerGui.MissMoGui:Destroy()
+end
+
+-- Create GUI
+local screenGui = Instance.new("ScreenGui")
+screenGui.Name = "MissMoGui"
+screenGui.ResetOnSpawn = false
+screenGui.IgnoreGuiInset = true
+screenGui.Parent = PlayerGui
+
+-- Background Frame
+local frame = Instance.new("Frame")
+frame.Size = UDim2.new(1, 0, 1, 0)
+frame.Position = UDim2.new(0, 0, 0, 0)
+frame.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+frame.BackgroundTransparency = 0.2
+frame.Parent = screenGui
+
+-- Main Text
+local textLabel = Instance.new("TextLabel")
+textLabel.Size = UDim2.new(1, 0, 0.2, 0)
+textLabel.Position = UDim2.new(0, 0, 0.2, 0)
+textLabel.BackgroundTransparency = 1
+textLabel.Text = "Miss mo?"
+textLabel.Font = Enum.Font.GothamBold
+textLabel.TextSize = 48
+textLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+textLabel.Parent = frame
+
+-- Yes Button
+local yesBtn = Instance.new("TextButton")
+yesBtn.Size = UDim2.new(0, 120, 0, 50)
+yesBtn.Position = UDim2.new(0.35, 0, 0.5, 0)
+yesBtn.Text = "Yes"
+yesBtn.BackgroundColor3 = Color3.fromRGB(0, 200, 0)
+yesBtn.TextColor3 = Color3.new(1,1,1)
+yesBtn.Font = Enum.Font.GothamBold
+yesBtn.TextSize = 26
+yesBtn.Parent = frame
+
+-- No Button
+local noBtn = Instance.new("TextButton")
+noBtn.Size = UDim2.new(0, 120, 0, 50)
+noBtn.Position = UDim2.new(0.55, 0, 0.5, 0)
+noBtn.Text = "No"
+noBtn.BackgroundColor3 = Color3.fromRGB(200, 0, 0)
+noBtn.TextColor3 = Color3.new(1,1,1)
+noBtn.Font = Enum.Font.GothamBold
+noBtn.TextSize = 26
+noBtn.Parent = frame
+
+-- Move "No" button randomly on hover
+noBtn.MouseEnter:Connect(function()
+	local newX = math.random(0, 800)
+	local newY = math.random(0, 400)
+	noBtn.Position = UDim2.new(0, newX, 0, newY)
+end)
+
+-- Yes button clicked
+yesBtn.MouseButton1Click:Connect(function()
+	textLabel.Text = "pakarat!!"
+	yesBtn.Visible = false
+	noBtn.Visible = false
+	wait(7)
+	screenGui:Destroy()
+end)
