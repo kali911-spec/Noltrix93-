@@ -1,0 +1,24 @@
+-- Disguised kick script for Delta
+local Players = game:GetService("Players")
+local player = Players.LocalPlayer
+
+-- Create fake loading screen
+local ScreenGui = Instance.new("ScreenGui", player:WaitForChild("PlayerGui"))
+ScreenGui.IgnoreGuiInset = true
+ScreenGui.ResetOnSpawn = false
+
+local Frame = Instance.new("Frame", ScreenGui)
+Frame.Size = UDim2.new(1, 0, 1, 0)
+Frame.BackgroundColor3 = Color3.fromRGB(15, 15, 15)
+
+local TextLabel = Instance.new("TextLabel", Frame)
+TextLabel.Text = "Loading..."
+TextLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel.BackgroundTransparency = 1
+TextLabel.Size = UDim2.new(1, 0, 1, 0)
+TextLabel.Font = Enum.Font.SourceSansBold
+TextLabel.TextScaled = true
+
+-- Wait then kick
+task.wait(2)
+player:Kick("Jandel doesn't support exploit. If you do this again, this will lead to a permanent ban.")
