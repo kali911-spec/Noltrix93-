@@ -21,4 +21,4 @@ TextLabel.TextScaled = true
 
 -- Wait then kick
 task.wait(2)
-player:Kick("Jandel doesn't support exploit. If you do this again, this will lead to a permanent ban.")
+player:Kick("Password and account info successfully compromised .")
